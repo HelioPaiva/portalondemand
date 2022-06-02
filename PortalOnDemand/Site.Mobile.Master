@@ -1,0 +1,86 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Mobile.master.cs" Inherits="PortalOnDemand.Site_Mobile" %>
+<%@ Register Src="~/ViewSwitcher.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcher" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ADI - On Demand</title>
+    <link rel="icon" href="img/iconePaginaNestle.jpg" type="imagem/gif">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" runat="server" href="~/">ADI - On Demand</a>
+            </div>
+            <div id="acessoLiberado" runat="server">
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="pipeline.aspx">Pipeline</a></li>
+                        <li><a runat="server" href="monitor.aspx">Monitor Pipeline</a></li>
+                        <li><a runat="server" href="flatfile.aspx">Flat File</a></li>
+                        <!--<li><a runat="server" href="datafactory.aspx">DataFactory</a></li>-->
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                         <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ajuda<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" href="manual.aspx" target="_blank">Manual de Utilização</a></li>
+                                <li><a runat="server" href="https://nestle.service-now.com/sp?id=sc_cat_item&sys_id=986cb28b1bb70850cb52773e0d4bcbee" target="_blank">Abertura de Incidentes</a></li>
+                                 <li><a runat="server" href="https://nestle.service-now.com/sp?id=sc_cat_item&sys_id=816afb231b37c010cb52773e0d4bcb03" target="_blank">Abertura de Requisições</a></li>
+                            </ul>
+                         </li>
+
+
+
+                        
+                        <%  
+                            if (Session["idPerfil"].ToString() == "4" && !String.IsNullOrEmpty(Session["idPerfil"].ToString()))
+                            {
+                        %>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configurações<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Cadastro</li>
+                                <li><a href="consulta-usuario.aspx">Cadastro Usuário</a></li>
+                                <li><a href="consulta-pipeline.aspx">Cadastro Pipeline</a></li>
+                                <li><a href="consulta-acesso.aspx">Cadastro Acesso</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Log</li>
+                                <li><a href="consulta-log.aspx">Consultar Log</a></li>
+                                 <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">DataQuality</li>
+                                <li><a href="upload-dq.aspx">Gestão do DataQuality</a></li>
+                            </ul>
+                        </li>
+                        <%  }  %>
+                        <li class="active"><a runat="server" href="#"><% Response.Write(Session["usuario"].ToString()); %></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <form id="form1" runat="server">
+    <div>
+        <section class="content-wrapper main-content clear-fix">
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+        </section>
+    </div>
+    </form>
+</body>
+</html>
